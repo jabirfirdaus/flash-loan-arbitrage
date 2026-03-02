@@ -1,66 +1,57 @@
-## Foundry
+# ⚡ DeFi Flash Loan Arbitrage Bot & Gas Optimization Sandbox
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A professional-grade sandbox environment demonstrating advanced EVM capabilities, including Decentralized Finance (DeFi) Flash Loan mechanics and extreme gas optimization techniques.
 
-Foundry consists of:
+## 🏗️ Architecture & Features
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+This repository is divided into two core technical demonstrations:
 
-## Documentation
+### 1. Flash Loan Arbitrage Implementation
 
-https://book.getfoundry.sh/
+Demonstrates how to borrow uncollateralized assets from a lending pool, execute trades across multiple Decentralized Exchanges (DEXs), and repay the loan within a single transaction block.
 
-## Usage
+- **Mainnet Forking:** Utilizes Foundry's mainnet fork testing capabilities to interact with real-world protocols (Uniswap V2) safely in a local environment.
+- **Interface Segregation:** Adheres to clean architecture by separating `IERC20`, `ILendingPool`, and `IUniswapV2Router` interfaces.
+- **Security First:** Implements proper access control (`msg.sender == owner`) and strict profitability checks to ensure transactions revert if the arbitrage fails, protecting against financial loss.
 
-### Build
+### 2. EVM Gas Optimization (Storage Packing)
 
-```shell
-$ forge build
-```
+Demonstrates deep understanding of Ethereum Virtual Machine (EVM) storage slots and opcode costs.
 
-### Test
+- **Struct Data Packing:** Reduces gas consumption significantly by packing multiple smaller data types (`uint128`) into a single 32-byte storage slot, minimizing expensive `SSTORE` operations.
+- **Gas Reporting:** Includes comprehensive Foundry gas reports proving the mathematical efficiency of the packed structures versus unoptimized storage.
 
-```shell
-$ forge test
-```
+## 🚀 Getting Started
 
-### Format
+### Prerequisites
 
-```shell
-$ forge fmt
-```
+- [Foundry](https://getfoundry.sh/) installed on your local machine.
 
-### Gas Snapshots
+### Installation
 
-```shell
-$ forge snapshot
-```
+1. Clone the repository:
 
-### Anvil
+   ```bash
+   git clone [https://github.com/jabirfirdaus/flash-loan-arbitrage](https://github.com/jabirfirdaus/flash-loan-arbitrage)
+   cd flash-loan-bot
 
-```shell
-$ anvil
-```
+   ```
 
-### Deploy
+2. Install dependencies:
+   Bash
+   forge install
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+3. Set up your environment variables:
+   Create a .env file in the root directory and add a mock private key and an RPC URL:
+   PRIVATE_KEY=your_mock_private_key
+   RPC_URL=[https://ethereum.publicnode.com](https://ethereum.publicnode.com)
 
-### Cast
+Testing & Execution
+Run Gas Optimization Tests:
+forge test --match-contract StorageMeter --gas-report
 
-```shell
-$ cast <subcommand>
-```
+    Run Mainnet Fork Flash Loan Simulation:
+    forge test --match-path test/UniswapFork.t.sol -vv --fork-url $RPC_URL
 
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+📜 Disclaimer
+This project is strictly for educational and portfolio demonstration purposes. The smart contracts have not been audited. Do not use them in production with real funds without proper modification and professional auditing.
