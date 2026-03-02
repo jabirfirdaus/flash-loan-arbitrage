@@ -47,10 +47,13 @@ Demonstrates deep understanding of Ethereum Virtual Machine (EVM) storage slots 
    RPC_URL=[https://ethereum.publicnode.com](https://ethereum.publicnode.com)
 
 Testing & Execution
-Run Gas Optimization Tests:
-forge test --match-contract StorageMeter --gas-report
 
-    Run Mainnet Fork Flash Loan Simulation:
+Run Gas Optimization Tests:
+
+    forge test --match-contract StorageMeter --gas-report
+
+Run Mainnet Fork Flash Loan Simulation:
+
     forge test --match-path test/UniswapFork.t.sol -vv --fork-url $RPC_URL
 
 📜 Disclaimer
